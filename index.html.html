@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>Study Notes</title>
+    
+    <style>
+        :root { --bg-color: #fafafa; --text-main: #333; --accent: #2c3e50; --border: #ddd; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+        
+        #panic-btn { position: absolute; top: 15px; right: 15px; padding: 8px 12px; background: transparent; border: 1px solid var(--border); color: #888; font-size: 12px; border-radius: 4px; cursor: pointer; transition: 0.2s; }
+        #panic-btn:hover { background: #eee; color: #333; }
+
+        .container { width: 100%; max-width: 450px; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center; }
+        .hidden { display: none !important; }
+
+        h2 { margin-bottom: 20px; font-weight: 500; font-size: 20px; }
+        
+        /* THE SECRET LETTER BOX DESIGN */
+        #original-letter { text-align: left; background: #f1f5f9; padding: 15px; border-left: 4px solid var(--accent); border-radius: 4px; margin-bottom: 20px; font-size: 15px; color: #444; line-height: 1.6; max-height: 300px; overflow-y: auto; }
+        
+        input, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border); border-radius: 4px; font-size: 14px; outline: none; }
+        input:focus, textarea:focus { border-color: var(--accent); }
+        textarea { resize: vertical; min-height: 120px; }
+        
+        button.primary-btn { width: 100%; padding: 12px; background: var(--accent); color: #fff; border: none; border-radius: 4px; font-size: 15px; cursor: pointer; font-weight: 500; transition: 0.2s; margin-bottom: 10px; }
+        button.primary-btn:hover { background: #1a252f; }
+        button.secondary-btn { width: 100%; padding: 12px; background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; font-size: 15px; cursor: pointer; font-weight: 500; transition: 0.2s; }
+        button.secondary-btn:hover { background: #f0f0f0; }
+        
+        .error { color: #d9534f; font-size: 13px; margin-top: 10px; min-height: 15px; }
+        .info-text { color: #d9534f; font-size: 13px; font-weight: 600; margin-bottom: 15px; }
+        
+        #display-msg { text-align: left; background: #f9f9f9; padding: 15px; border: 1px solid var(--border); border-radius: 4px; margin-bottom: 20px; font-size: 14px; color: #444; white-space: pre-wrap; word-wrap: break-word; }
+        .lock-icon { font-size: 40px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <button id="panic-btn" type="button" onclick="window.location.replace('https://en.wikipedia.org/wiki/Algebra')">Study Material</button>
+
+    <div id="login-screen" class="container">
+        <h2>Important Message for Kanak</h2>
+        <input type="text" id="visitor-name" placeholder="Enter Your Name" autocomplete="off">
+        <input type="password" id="passcode" placeholder="Passcode (Your and Roshan Birthdate)" autocomplete="off">
+        <button type="button" class="primary-btn" onclick="verifyAccess()">Unlock</button>
+        <div id="error-msg" class="error"></div>
+    </div>
+
+    <div id="compose-screen" class="container hidden">
+        <h2>Secret Message</h2>
+        
+        <div id="original-letter">
+            Hello Kanak <br>
+           Relax, Ghabrana mat ya panic mat ho aur ye baat kisi ko nhi ptta hai jo copy diya tumko usko bhi nhi aur iss baar tum bilkul safe ho. Mein Roshan shyad tum pehle hi samj gyi ho tum soch rhi hogi ki achanak itne time baad ye sab kya hai. such ye hai ki mein nhi bhool paya tumko last try aur effort krna chahta tha agar pardh rhi ho toh tum boli thi na ki bhool jao, Kanak nhi bhool paya tumko bohot koshis kiya aaj tak shyad koi hi aisa 
+          din hoga jis din tumko yaad na kiya hu mein janta hu tum soch rhi hogi ki yeh fir se kaha se aa gya mein aage bardh gyi thi ptta hai tumko feel hua hoga ki fir se ye sab tension aur headache nhi chahaiye janta hu par janta hu tum apne life
+          mein kafi aage nikal chuki hogi shyad move on kar chuki hogi par kanak mein such bolu toh mein tumhare bare mein soch ke aur sirf tumhare baat ka respect krte hue 1 saal 5 mahine se tumse contact krne ka 
+          koshis nhi kiya krna chahta toh bohot pehle kar leta par tumhare baat ka respect rakhte hue tum jo boli thi wo krne ka koshis kiya par nhi kar paya kanak tum boli thi hum bhi bhool jaynge ki Roshan naam ka ladka mere life mein tha 
+          mein sirf itna janna chahta hu ki kya tum bhool payi aur kya move on kar payi ? shayad naye school mein jane ke baad kya ptta move on kar li hogi tum par mein nhi kar paya
+          such mein sorry tum wapas se life mein piche lane ke liye shyad tum khush ho ya nhi mere bina ptta nhi kanak bohot mushkil se tumhare bare mein ptta chala hai ki tum kis school mein ho mere ko plzz galat mat samjna mein 1.5 sal mein bhi tumko bhool nhi paaya kanak sare memories abhi bhi yaad hai tumhara aur mera birthday bhi abhi hi guzra hai tumko ya kab mila hai ptta nhi kya bolu kuch samj nhi aa rha hai such mein agar tum ye pardh rhi ho toh bhagwaan ko bohot thank you bolna chahunga. Mein sirf ek baar try krna chahta tha kyuki mein socha 
+          ki shayd tum daar mein ya pressure mein aisa boli thi uss din history ke boards exam ke din issliye sirf ek baar tumse sunna chahta tha usi din se mera sawal tha jis din tum ye boli thi par mein socha abb tum mere se baat bhi nhi krna chahti hogi issliye tumse kuch bolne nhi aaya mein janta hu abb sab kuch bhula ke aage bardh chuki hogi vaisnavi se bhi pucha wo boli mera baat nhi hota hai 
+          ptta nhi tum soch rhi hogi ki mere ko dusri ladki mil gayi hogi toh aisa nhi hain kanak bilkul bhi tumhare aalwa kisi ke bare mein soch bhi nhi sakta hu sare ke sare matlabi hai. Kiska nazar lag gya ki hum dono ka relationship aise time peh toota jab sabse accha chal rha tha. Mein janta hu tumahre dil mein bhi kuch raha hoga jo mere se baat krte krte good night se good morning kab ho jata tha ptta nhi chalta tha. 
+          kitna misunderstanding aaya kitna problem aaya sab solve kar liye sab ladai se upar uth gye lekin last mein jiska daar tha wahi hua aur aakhir jiska daar tha wahi hua ptta nhi bhagwaan bhi kyu nhi bachaye mein hamesha yahi sochta hu ki jab aisa hona tha
+          tub bhagwaan hum dono ko milaye kyu aur itna accha memories bana ki marte time tak usse accha memories mere liye such mein koi aur ban hi nhi skta kanak mere paas sab hai dost hai Aryan hai kafi sath diya mera shyad hi uske jaisa koi sath dene wala dost mile kafi acche dost hai school mein accha image hai jiska log pana chahte hai wo sab hain mere paas par kanak jisko mein pana chahta tha jiske rehne se mere ko complete feel hota tha lgta tha isi ka wait tha wahi nhi hai mere paas fir sare logo ke hone ke baad nhi kami lgta hai mein sirf apna feelings btta rhaa hu tumko jo mein tumko batana chahta tha par abb jarurat feel ho rha hai batane ka tumhare 1.5 saal na rehne se kafi kuch badal gya mere liye par aaj tak iska jawab nhi mil paya ki kya aise relationship khtam hona tha yahi end tha ? Mere maan mein 1 sawal tha ki kanak jab tuhmari mummy 
+          ko ptta chal gya tha toh mein janta hu kafi pressure aur kafi daar ke tum ye decision li hogi jisme hum dono ka safty raha hoga par kya uss decision ka regret hua tha ? ptta nhi tumhare mein mere liye koi feelings bacha hai ya nhi par mein tumko nhi bhooln
+          paya kafi koshis kiya mein janta hu ho skta hai tumko ye sab silly lag rha hoga class 12 mein aa gaye hai abb ye sab ka time hi kaha hai yahi soch rhi hogi na par mein zindgi bhar uss regret ke sath nhi jina chahta tha ki kash uss din agar tumko contact krne ka koshis kiya hota toh aaj situation kuch aur rehta. Yaad karo ek baar aur aise hi webpage bana ke link bheja tha toh mein bola tha ki chahe sath rahe ya na rahe ek aisa baat hai jo hum dono mein common hai ki tumhare life mein mai tha aur mere life mein tum mein kafi lucky raha jo kanak tum aai mere life mein bhale hi sara life tumare sath nhi spent kar paya par jitna kiya mere liye sabse memorable hai aur usse bhi jyda lucky hu agar tum ye pardh rhi ho toh. Iss message ko pardh ke overthink mat krna tumhare har decision ka respect krta hu 
+          aur issliye 1.5 saal tak nhi kiya contact par mein aisa end nhi chahta tha shyad tum bhi nhi chahti thi. Please tumse request hai koi pressure aur stress mat lena par plzz jab time mile jald hi mere ko reply dena yaha niche type kar skti ho mere tak message aa jayega aur iss baar ye secure hai tumhari mummy ko ptta nhi chalega aur plzz gussa mein batana mat unko mein fir se tumhare parents ko aur tumko kisi tarah se tension nhi dena chahta hu. mein janna chahta tha ki kya abhi bhi tumhare dil mein hai kuch mere bare mein ? kya tum aisa sochti ho ki kash fir se sab kuch normal ho pata pehle jaisa aur sara problems solve ho jata ? koi pressure ya force nhi hai mein sirf janna chahta tha tumhara feelings kya hai aur tum kya chahti ho. Agar thoda sa bhi pyar ki thi mere se toh plese reply dena. Mere ko koi problem nhi agar abb tum nhi chahti ki sab normal pehle jaisa ho bus reply mein keh dena ek baar fir mein kabhi contact nhi krunga pareshan nhi karunga. Jaisi jo jaha bhi ho hamesha khush rehna aur i tumhare life mein sab kuch accha hoga. Patta nhi tum reply dogi ya nhi kya reply dogi Agar tumhara reply no bhi hota hai uske liye bhi mein ready hu 
+          mere ko bura lage issliye kuch accha mat likhna dil se likhna mein janta hu shyad tum bologi ki abb time hai sab kuch khtam kar ke life mein aage bardhe aur apne apne kaam mein busy jo jaye par sirf ek baar samjhana chaunga mere ko selfish mat samjna par mere ko lgta hai mein tumhare sath jitna khush rehta tha aur rahunga utna kisi ke sath bhi nhi reh skta tha kya tum bhi ? Mere negetive positive reply dono ke liye hi ready hu reply dena plzz jo bhi maan mein hai sab likh dena taki agar tum mere ko bhoolna chaho tumhare liye aasan ho jaye mein tumhare choice ka respect krta hu jo tum chahti ho wahi hoga agar tumhara reply no bhi hota hai toh mein tumko bhoolne ke bare mein nhi sochunga bus tumko aisi memory bana ke rakhunga jisko yaad krte hi face peh smile aa jaye ek aisa memory jo kabhi bhool nhi skta mein bhi life mein aage bardhne ka koshis karunga jo tumko bola tha wo karunga NDA nikal ke life jaha le jana chahegi wahi jaunga 
+          par har kaise bhi halat aa jaye mein kabhi nhi bhoolunga tumko kabhi bhi nhi. I will wait for your reply plzz reply dena. Mein hamesha se tumse pyar krta tha aur krte rahunga always...
+          
+        </div> 
+
+        <h2 id="compose-title" style="font-size: 16px; margin-top: 20px; color: var(--accent);">Write your reply below</h2>
+        <textarea id="chat-msg" placeholder="Type your reply here..."></textarea>
+        <button type="button" class="primary-btn" onclick="sendMessage()">Send Securely</button>
+    </div>
+
+    <div id="view-screen" class="container hidden">
+        <div class="info-text" id="edit-status">You can edit your message only 2 times.</div>
+        <div id="display-msg"></div>
+        <button type="button" class="secondary-btn" onclick="openEditMode()">Edit Message</button>
+    </div>
+
+    <div id="locked-screen" class="container hidden">
+        <div class="lock-icon">🔒</div>
+        <h2>Room Locked</h2>
+        <p style="color: #777; font-size: 14px;">Your message is saved. You cannot edit it anymore.</p>
+    </div>
+
+    <script>
+        // 🚨 TERA DISCORD WEBHOOK 🚨
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1543932933612642394/j2WXyWpRHcCCPKTUvcEGUuOIuyo7w_0dMv5i3Evxabgn2hA0dZkU5mGF6gNVpgYdH1-W"; 
+        
+        const EXPECTED_HASH = "MjUwMQ=="; // Password is 2501
+        
+        let userName = "";
+        let editCount = 0;
+        let isFirstMessage = true;
+
+        // Get Exact Time Function
+        function getExactTime() {
+            return new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', hour12: true });
+        }
+
+        // Discord Sender Function (Clean Text Mode)
+        function sendDiscordAlert(messageContent) {
+            if(!WEBHOOK_URL) return;
+            fetch(WEBHOOK_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ content: messageContent })
+            }).catch(() => console.log("Stealth mode active."));
+        }
+
+        // 1. Verify Access & Tripwire
+        function verifyAccess() {
+            const nameInput = document.getElementById("visitor-name").value.trim();
+            const passInput = document.getElementById("passcode").value;
+            const errorDiv = document.getElementById("error-msg");
+            
+            if (nameInput === "") {
+                alert("Please enter your name first!");
+                errorDiv.innerText = "Name is required.";
+                return;
+            }
+
+            if (btoa(passInput) === EXPECTED_HASH) {
+                userName = nameInput;
+                
+                // 🚨 TRIPWIRE: Clean Notification without markdown
+                const entryTime = getExactTime();
+                sendDiscordAlert(`🚨 ALARM: ${userName} entered the room at ${entryTime}`);
+
+                document.getElementById("login-screen").classList.add("hidden");
+                document.getElementById("compose-screen").classList.remove("hidden");
+            } else {
+                errorDiv.innerText = "Incorrect passcode.";
+                document.getElementById("passcode").value = "";
+                setTimeout(() => errorDiv.innerText = "", 2000);
+            }
+        }
+
+        // 2. Send Message Logic
+        function sendMessage() {
+            const msg = document.getElementById("chat-msg").value.trim();
+            if (msg === "") {
+                alert("Message cannot be empty!");
+                return;
+            }
+
+            const actionTime = getExactTime();
+            // Clean message type
+            const actionType = isFirstMessage ? "📩 NEW MESSAGE" : "✏️ EDITED MESSAGE";
+            
+            // 🚨 Send message to Discord without extra *** symbols
+            sendDiscordAlert(`${actionType} from ${userName} (${actionTime}):\n\n${msg}`);
+
+            if (isFirstMessage) {
+                isFirstMessage = false;
+                document.getElementById("compose-screen").classList.add("hidden");
+                document.getElementById("view-screen").classList.remove("hidden");
+                document.getElementById("display-msg").innerText = msg;
+            } else {
+                editCount++;
+                if (editCount >= 2) {
+                    document.getElementById("compose-screen").classList.add("hidden");
+                    document.getElementById("locked-screen").classList.remove("hidden");
+                } else {
+                    document.getElementById("compose-screen").classList.add("hidden");
+                    document.getElementById("view-screen").classList.remove("hidden");
+                    document.getElementById("display-msg").innerText = msg;
+                    document.getElementById("edit-status").innerText = "You can edit your message only 1 more time.";
+                }
+            }
+        }
+
+        // 3. Open Edit Mode
+        function openEditMode() {
+            const currentMsg = document.getElementById("display-msg").innerText;
+            document.getElementById("chat-msg").value = currentMsg;
+            document.getElementById("compose-title").innerText = "Edit your reply below";
+            
+            // Edit mode mein apna message chupa dete hain taaki box chota ho jaye
+            document.getElementById("original-letter").style.display = "none";
+            
+            document.getElementById("view-screen").classList.add("hidden");
+            document.getElementById("compose-screen").classList.remove("hidden");
+        }
+
+        // Idle Timeout
+        let idleTimer;
+        function resetTimer() { clearTimeout(idleTimer); idleTimer = setTimeout(() => { location.reload(true); }, 300000); }
+        window.onload = resetTimer; document.onmousemove = resetTimer; document.onkeydown = resetTimer;
+    </script>
+</body>
+</html>
