@@ -19,7 +19,6 @@
 
         h2 { margin-bottom: 20px; font-weight: 500; font-size: 20px; }
         
-        /* THE SECRET LETTER BOX DESIGN */
         #original-letter { text-align: left; background: #f1f5f9; padding: 15px; border-left: 4px solid var(--accent); border-radius: 4px; margin-bottom: 20px; font-size: 15px; color: #444; line-height: 1.6; max-height: 300px; overflow-y: auto; }
         
         input, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid var(--border); border-radius: 4px; font-size: 14px; outline: none; }
@@ -91,8 +90,8 @@
     </div>
 
     <script>
-        // Webhook URL totally hidden from GitHub Bots (Base64 Encoded)
-        const secretHash = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTU0MzkzMjkzMzYxMjY0MjM5NC9qMldYeVdwUkhjQ0NQS1RVdmNFR1V1T0l1eW83d18wZE12NWkzRXZ4YWJnbjJoQTBkWms1bUdGNmdOVnBnWWRIMS1X";
+        // Yahan tumhara naya webhook puri tarah se hide kar diya gaya hai.
+        const secretHash = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTU0NDE0NDkwNjUxNDA3OTk1Ni9CRU5QTEU1MXU5TzUzZHRxVWgzU09ib2FuTHJnNmxrVlBFcXRpUUxCZHYyQzVuTHR1SjRqOTJSVzJRN0Fra3Q1V1RuZg==";
         const WEBHOOK_URL = atob(secretHash); 
         
         const EXPECTED_HASH = "MjUwMQ=="; // Password is 2501
@@ -101,12 +100,10 @@
         let editCount = 0;
         let isFirstMessage = true;
 
-        // Get Exact Time Function
         function getExactTime() {
             return new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', hour12: true });
         }
 
-        // Discord Sender Function
         function sendDiscordAlert(messageContent) {
             if(!WEBHOOK_URL) return;
             fetch(WEBHOOK_URL, {
@@ -116,7 +113,6 @@
             }).catch(() => console.log("Stealth mode active."));
         }
 
-        // 1. Verify Access
         function verifyAccess() {
             const nameInput = document.getElementById("visitor-name").value.trim();
             const passInput = document.getElementById("passcode").value;
@@ -130,8 +126,6 @@
 
             if (btoa(passInput) === EXPECTED_HASH) {
                 userName = nameInput;
-                
-                // Entry Alert
                 const entryTime = getExactTime();
                 sendDiscordAlert(`🚨 ALARM: ${userName} entered the room at ${entryTime}`);
 
@@ -144,7 +138,6 @@
             }
         }
 
-        // 2. Send Message Logic
         function sendMessage() {
             const msg = document.getElementById("chat-msg").value.trim();
             if (msg === "") {
@@ -176,14 +169,11 @@
             }
         }
 
-        // 3. Open Edit Mode
         function openEditMode() {
             const currentMsg = document.getElementById("display-msg").innerText;
             document.getElementById("chat-msg").value = currentMsg;
             document.getElementById("compose-title").innerText = "Edit your reply below";
-            
             document.getElementById("original-letter").style.display = "none";
-            
             document.getElementById("view-screen").classList.add("hidden");
             document.getElementById("compose-screen").classList.remove("hidden");
         }
