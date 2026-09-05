@@ -35,12 +35,14 @@
         
         #display-msg { text-align: left; background: #f9f9f9; padding: 15px; border: 1px solid var(--border); border-radius: 4px; margin-bottom: 20px; font-size: 14px; color: #444; white-space: pre-wrap; word-wrap: break-word; }
         .lock-icon { font-size: 40px; margin-bottom: 10px; }
+        .question-text { text-align: left; font-size: 15px; margin-bottom: 15px; color: #444; }
     </style>
 </head>
 <body>
 
     <button id="panic-btn" type="button" onclick="window.location.replace('https://en.wikipedia.org/wiki/Algebra')">Study Material</button>
 
+    <!-- SCREEN 1: Name and Passcode -->
     <div id="login-screen" class="container">
         <h2>Important Message for Kanak</h2>
         <input type="text" id="visitor-name" placeholder="Enter Your Name" autocomplete="off">
@@ -49,27 +51,27 @@
         <div id="error-msg" class="error"></div>
     </div>
 
+    <!-- SCREEN 2: The Secret Question Layer -->
+    <div id="security-question-screen" class="container hidden">
+        <h2 style="color: var(--accent);">Answer question to read message from Roshan</h2>
+        <p class="question-text">What was nickname kanak call roshan with?</p>
+        <input type="text" id="nickname-answer" placeholder="Type answer here..." autocomplete="off">
+        <button type="button" class="primary-btn" onclick="verifyQuestion()">Read Message</button>
+        <div id="question-error-msg" class="error"></div>
+    </div>
+
+    <!-- SCREEN 3: The Letter and Reply Area -->
     <div id="compose-screen" class="container hidden">
         <h2>Secret Message</h2>
         
         <div id="original-letter">
+            <!-- BHAI YAHAN APNA FINAL WALA "MASTERPIECE" LETTER PASTE KAR DENA -->
             Hello Kanak <br>
-           Relax, Ghabrana mat ya panic mat ho aur ye baat kisi ko nhi ptta hai jo copy diya tumko usko bhi nhi aur iss baar tum bilkul safe ho. Mein Roshan shyad tum pehle hi samj gyi ho tum soch rhi hogi ki achanak itne time baad ye sab kya hai. such ye hai ki mein nhi bhool paya tumko last try aur effort krna chahta tha agar pardh rhi ho toh tum boli thi na ki bhool jao, Kanak nhi bhool paya tumko bohot koshis kiya aaj tak shyad koi hi aisa 
-          din hoga jis din tumko yaad na kiya hu mein janta hu tum soch rhi hogi ki yeh fir se kaha se aa gya mein aage bardh gyi thi ptta hai tumko feel hua hoga ki fir se ye sab tension aur headache nhi chahaiye janta hu par janta hu tum apne life
-          mein kafi aage nikal chuki hogi shyad move on kar chuki hogi par kanak mein such bolu toh mein tumhare bare mein soch ke aur sirf tumhare baat ka respect krte hue 1 saal 5 mahine se tumse contact krne ka 
-          koshis nhi kiya krna chahta toh bohot pehle kar leta par tumhare baat ka respect rakhte hue tum jo boli thi wo krne ka koshis kiya par nhi kar paya kanak tum boli thi hum bhi bhool jaynge ki Roshan naam ka ladka mere life mein tha 
-          mein sirf itna janna chahta hu ki kya tum bhool payi aur kya move on kar payi ? shayad naye school mein jane ke baad kya ptta move on kar li hogi tum par mein nhi kar paya
-          such mein sorry tum wapas se life mein piche lane ke liye shyad tum khush ho ya nhi mere bina ptta nhi kanak bohot mushkil se tumhare bare mein ptta chala hai ki tum kis school mein ho mere ko plzz galat mat samjna mein 1.5 sal mein bhi tumko bhool nhi paaya kanak sare memories abhi bhi yaad hai tumhara aur mera birthday bhi abhi hi guzra hai tumko ya kab mila hai ptta nhi kya bolu kuch samj nhi aa rha hai such mein agar tum ye pardh rhi ho toh bhagwaan ko bohot thank you bolna chahunga. Mein sirf ek baar try krna chahta tha kyuki mein socha 
-          ki shayd tum daar mein ya pressure mein aisa boli thi uss din history ke boards exam ke din issliye sirf ek baar tumse sunna chahta tha usi din se mera sawal tha jis din tum ye boli thi par mein socha abb tum mere se baat bhi nhi krna chahti hogi issliye tumse kuch bolne nhi aaya mein janta hu abb sab kuch bhula ke aage bardh chuki hogi vaisnavi se bhi pucha wo boli mera baat nhi hota hai 
-          ptta nhi tum soch rhi hogi ki mere ko dusri ladki mil gayi hogi toh aisa nhi hain kanak bilkul bhi tumhare aalwa kisi ke bare mein soch bhi nhi sakta hu sare ke sare matlabi hai. Kiska nazar lag gya ki hum dono ka relationship aise time peh toota jab sabse accha chal rha tha. Mein janta hu tumahre dil mein bhi kuch raha hoga jo mere se baat krte krte good night se good morning kab ho jata tha ptta nhi chalta tha. 
-          kitna misunderstanding aaya kitna problem aaya sab solve kar liye sab ladai se upar uth gye lekin last mein jiska daar tha wahi hua aur aakhir jiska daar tha wahi hua ptta nhi bhagwaan bhi kyu nhi bachaye mein hamesha yahi sochta hu ki jab aisa hona tha
-          tub bhagwaan hum dono ko milaye kyu aur itna accha memories bana ki marte time tak usse accha memories mere liye such mein koi aur ban hi nhi skta kanak mere paas sab hai dost hai Aryan hai kafi sath diya mera shyad hi uske jaisa koi sath dene wala dost mile kafi acche dost hai school mein accha image hai jiska log pana chahte hai wo sab hain mere paas par kanak jisko mein pana chahta tha jiske rehne se mere ko complete feel hota tha lgta tha isi ka wait tha wahi nhi hai mere paas fir sare logo ke hone ke baad nhi kami lgta hai mein sirf apna feelings btta rhaa hu tumko jo mein tumko batana chahta tha par abb jarurat feel ho rha hai batane ka tumhare 1.5 saal na rehne se kafi kuch badal gya mere liye par aaj tak iska jawab nhi mil paya ki kya aise relationship khtam hona tha yahi end tha ? Mere maan mein 1 sawal tha ki kanak jab tuhmari mummy 
-          ko ptta chal gya tha toh mein janta hu kafi pressure aur kafi daar ke tum ye decision li hogi jisme hum dono ka safty raha hoga par kya uss decision ka regret hua tha ? ptta nhi tumhare mein mere liye koi feelings bacha hai ya nhi par mein tumko nhi bhooln
-          paya kafi koshis kiya mein janta hu ho skta hai tumko ye sab silly lag rha hoga class 12 mein aa gaye hai abb ye sab ka time hi kaha hai yahi soch rhi hogi na par mein zindgi bhar uss regret ke sath nhi jina chahta tha ki kash uss din agar tumko contact krne ka koshis kiya hota toh aaj situation kuch aur rehta. Yaad karo ek baar aur aise hi webpage bana ke link bheja tha toh mein bola tha ki chahe sath rahe ya na rahe ek aisa baat hai jo hum dono mein common hai ki tumhare life mein mai tha aur mere life mein tum mein kafi lucky raha jo kanak tum aai mere life mein bhale hi sara life tumare sath nhi spent kar paya par jitna kiya mere liye sabse memorable hai aur usse bhi jyda lucky hu agar tum ye pardh rhi ho toh. Iss message ko pardh ke overthink mat krna tumhare har decision ka respect krta hu 
-          aur issliye 1.5 saal tak nhi kiya contact par mein aisa end nhi chahta tha shyad tum bhi nhi chahti thi. Please tumse request hai koi pressure aur stress mat lena par plzz jab time mile jald hi mere ko reply dena yaha niche type kar skti ho mere tak message aa jayega aur iss baar ye secure hai tumhari mummy ko ptta nhi chalega aur plzz gussa mein batana mat unko mein fir se tumhare parents ko aur tumko kisi tarah se tension nhi dena chahta hu. mein janna chahta tha ki kya abhi bhi tumhare dil mein hai kuch mere bare mein ? kya tum aisa sochti ho ki kash fir se sab kuch normal ho pata pehle jaisa aur sara problems solve ho jata ? koi pressure ya force nhi hai mein sirf janna chahta tha tumhara feelings kya hai aur tum kya chahti ho. Agar thoda sa bhi pyar ki thi mere se toh plese reply dena. Mere ko koi problem nhi agar abb tum nhi chahti ki sab normal pehle jaisa ho bus reply mein keh dena ek baar fir mein kabhi contact nhi krunga pareshan nhi karunga. Jaisi jo jaha bhi ho hamesha khush rehna aur i tumhare life mein sab kuch accha hoga. Patta nhi tum reply dogi ya nhi kya reply dogi Agar tumhara reply no bhi hota hai uske liye bhi mein ready hu 
-          mere ko bura lage issliye kuch accha mat likhna dil se likhna mein janta hu shyad tum bologi ki abb time hai sab kuch khtam kar ke life mein aage bardhe aur apne apne kaam mein busy jo jaye par sirf ek baar samjhana chaunga mere ko selfish mat samjna par mere ko lgta hai mein tumhare sath jitna khush rehta tha aur rahunga utna kisi ke sath bhi nhi reh skta tha kya tum bhi ? Mere negetive positive reply dono ke liye hi ready hu reply dena plzz jo bhi maan mein hai sab likh dena taki agar tum mere ko bhoolna chaho tumhare liye aasan ho jaye mein tumhare choice ka respect krta hu jo tum chahti ho wahi hoga agar tumhara reply no bhi hota hai toh mein tumko bhoolne ke bare mein nhi sochunga bus tumko aisi memory bana ke rakhunga jisko yaad krte hi face peh smile aa jaye ek aisa memory jo kabhi bhool nhi skta mein bhi life mein aage bardhne ka koshis karunga jo tumko bola tha wo karunga NDA nikal ke life jaha le jana chahegi wahi jaunga 
-          par har kaise bhi halat aa jaye mein kabhi nhi bhoolunga tumko kabhi bhi nhi. I will wait for your reply plzz reply dena. Mein hamesha se tumse pyar krta tha aur krte rahunga always ek baar aur bolna chahunga kanak agar tum bhi abhi bhi mere jaisa hi chahti ho ki hum dono fir se mil sake baat kar sake aur pehle jaisa sab ho sake toh reply krna aur agar tum aisa chahti ho toh plzzz tension mat lena mein pkka koi na koi rasta nikal hi lunga taki hum dono mil sake dobara tum bilkul tension mat lena iss baar tum bilkul safe rahogi iss baat ka gurantee mein leta hu aur agar tum mere ko bhool ke move on krna chahti ho toh bhi mein support karunga aur fir doabra kabhi tumse baat aur contact krne ka koshis nhi karunga Yes ya No mein dono mein tumhara sath dunga ye mera promise hai decision tumhara hai acche se soch kr bina kisi ke pressure mein aaye decide krna aur mere ko reply karna sirf 1 last baar mere liye risk le ke message krna fir baki mera respnsibility rahega...
-          
+            Relax, Ghabrana mat ya panic mat ho aur ye baat kisi ko nhi ptta hai jo copy diya tumko usko bhi nhi aur iss baar tum bilkul safe ho. Mein Roshan shyad tum pehle hi samj gyi ho tum soch rhi hogi ki achanak itne time baad ye sab kya hai. such ye hai ki mein nhi bhool paya tumko last try aur effort krna chahta tha agar pardh rhi ho toh tum boli thi na ki bhool jao, Kanak nhi bhool paya tumko bohot koshis kiya aaj tak shyad koi hi aisa 
+            din hoga jis din tumko yaad na kiya hu mein janta hu tum soch rhi hogi ki yeh fir se kaha se aa gya mein aage bardh gyi thi ptta hai tumko feel hua hoga ki fir se ye sab tension aur headache nhi chahaiye janta hu par janta hu tum apne life
+            mein kafi aage nikal chuki hogi shyad move on kar chuki hogi par kanak mein such bolu toh mein tumhare bare mein soch ke aur sirf tumhare baat ka respect krte hue 1 saal 5 mahine se tumse contact krne ka 
+            koshis nhi kiya krna chahta toh bohot pehle kar leta par tumhare baat ka respect rakhte hue tum jo boli thi wo krne ka koshis kiya par nhi kar paya kanak tum boli thi hum bhi bhool jaynge ki Roshan naam ka ladka mere life mein tha 
+            mein sirf itna janna chahta hu ki kya tum bhool payi aur kya move on kar payi ? shayad naye school mein jane ke baad kya ptta move on kar li hogi tum par mein nhi kar paya...
         </div> 
 
         <h2 id="compose-title" style="font-size: 16px; margin-top: 20px; color: var(--accent);">Write your reply below</h2>
@@ -77,12 +79,14 @@
         <button type="button" class="primary-btn" onclick="sendMessage()">Send Securely</button>
     </div>
 
+    <!-- SCREEN 4: View Submitted Message -->
     <div id="view-screen" class="container hidden">
         <div class="info-text" id="edit-status">You can edit your message only 2 times.</div>
         <div id="display-msg"></div>
         <button type="button" class="secondary-btn" onclick="openEditMode()">Edit Message</button>
     </div>
 
+    <!-- SCREEN 5: Locked Screen (After max edits) -->
     <div id="locked-screen" class="container hidden">
         <div class="lock-icon">🔒</div>
         <h2>Room Locked</h2>
@@ -90,7 +94,6 @@
     </div>
 
     <script>
-        // Yahan tumhara naya webhook puri tarah se hide kar diya gaya hai.
         const secretHash = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTU0NDE0NDkwNjUxNDA3OTk1Ni9CRU5QTEU1MXU5TzUzZHRxVWgzU09ib2FuTHJnNmxrVlBFcXRpUUxCZHYyQzVuTHR1SjRqOTJSVzJRN0Fra3Q1V1RuZg==";
         const WEBHOOK_URL = atob(secretHash); 
         
@@ -113,6 +116,7 @@
             }).catch(() => console.log("Stealth mode active."));
         }
 
+        // STEP 1: Verify Passcode
         function verifyAccess() {
             const nameInput = document.getElementById("visitor-name").value.trim();
             const passInput = document.getElementById("passcode").value;
@@ -127,13 +131,33 @@
             if (btoa(passInput) === EXPECTED_HASH) {
                 userName = nameInput;
                 const entryTime = getExactTime();
-                sendDiscordAlert(`🚨 ALARM: ${userName} entered the room at ${entryTime}`);
+                // Tujhe Discord par pata chal jayega ki usne password clear kar liya hai
+                sendDiscordAlert(`🚨 ALARM: ${userName} cleared the first passcode at ${entryTime}`);
 
                 document.getElementById("login-screen").classList.add("hidden");
-                document.getElementById("compose-screen").classList.remove("hidden");
+                document.getElementById("security-question-screen").classList.remove("hidden");
             } else {
                 errorDiv.innerText = "Incorrect passcode.";
                 document.getElementById("passcode").value = "";
+                setTimeout(() => errorDiv.innerText = "", 2000);
+            }
+        }
+
+        // STEP 2: Verify Secret Question (Nickname)
+        function verifyQuestion() {
+            // .toLowerCase() ensure karega ki ROSHU, Roshu, roshu sab accept ho jaye
+            const answerInput = document.getElementById("nickname-answer").value.trim().toLowerCase();
+            const errorDiv = document.getElementById("question-error-msg");
+
+            if (answerInput === "roshu") {
+                const entryTime = getExactTime();
+                // Alert ki usne question bhi sahi diya aur letter khol liya
+                sendDiscordAlert(`✅ SUCCESS: ${userName} answered the secret question correctly and opened the letter at ${entryTime}`);
+                
+                document.getElementById("security-question-screen").classList.add("hidden");
+                document.getElementById("compose-screen").classList.remove("hidden");
+            } else {
+                errorDiv.innerText = "Incorrect answer. Try again.";
                 setTimeout(() => errorDiv.innerText = "", 2000);
             }
         }
