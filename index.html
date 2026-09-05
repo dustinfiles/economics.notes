@@ -29,6 +29,8 @@
         button.primary-btn:hover { background: #1a252f; }
         button.secondary-btn { width: 100%; padding: 12px; background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; font-size: 15px; cursor: pointer; font-weight: 500; transition: 0.2s; }
         button.secondary-btn:hover { background: #f0f0f0; }
+        button.forgot-btn { width: 100%; padding: 10px; background: transparent; color: #666; border: none; font-size: 13px; cursor: pointer; font-weight: 500; text-decoration: underline; margin-top: 5px; }
+        button.forgot-btn:hover { color: #333; }
         
         .error { color: #d9534f; font-size: 13px; margin-top: 10px; min-height: 15px; }
         .info-text { color: #d9534f; font-size: 13px; font-weight: 600; margin-bottom: 15px; }
@@ -45,7 +47,6 @@
 
     <button id="panic-btn" type="button" onclick="window.location.replace('https://en.wikipedia.org/wiki/History_of_India')">Study Material</button>
 
-    <!-- SCREEN 1: Name and Passcode -->
     <div id="login-screen" class="container">
         <h2>Important Message for Kanak</h2>
         <input type="text" id="visitor-name" placeholder="Enter Your Name" autocomplete="off">
@@ -54,21 +55,27 @@
         <div id="error-msg" class="error"></div>
     </div>
 
-    <!-- SCREEN 2: The Secret Question Layer -->
-    <div id="security-question-screen" class="container hidden">
+    <div id="security-question-screen-1" class="container hidden">
         <h2 style="color: var(--accent);">Answer question to read message from Roshan</h2>
         <p class="question-text">What was nickname kanak call roshan with?</p>
-        <input type="text" id="nickname-answer" placeholder="Type answer here..." autocomplete="off">
-        <button type="button" class="primary-btn" onclick="verifyQuestion()">Read Message</button>
-        <div id="question-error-msg" class="error"></div>
+        <input type="text" id="nickname-answer-1" placeholder="Type answer here..." autocomplete="off">
+        <button type="button" class="primary-btn" onclick="verifyQuestion1()">Read Message</button>
+        <button type="button" class="forgot-btn" onclick="showQuestion2()">I forgot</button>
+        <div id="question-error-msg-1" class="error"></div>
     </div>
 
-    <!-- SCREEN 3: The Letter and Reply Area -->
+    <div id="security-question-screen-2" class="container hidden">
+        <h2 style="color: var(--accent);">Answer question to read message from Roshan</h2>
+        <p class="question-text">What nickname did Roshan give you?</p>
+        <input type="text" id="nickname-answer-2" placeholder="Type answer here..." autocomplete="off">
+        <button type="button" class="primary-btn" onclick="verifyQuestion2()">Read Message</button>
+        <div id="question-error-msg-2" class="error"></div>
+    </div>
+
     <div id="compose-screen" class="container hidden">
         <h2>Secret Message</h2>
         
         <div id="original-letter">
-            <!-- BHAI YAHAN APNA FINAL WALA "MASTERPIECE" LETTER PASTE KAR DENA -->
             Hello Kanak <br>
             Relax, Ghabrana mat ya panic mat ho aur ye baat kisi ko nhi ptta hai jo copy diya tumko usko bhi nhi aur iss baar tum bilkul safe ho. Mein Roshan shyad tum pehle hi samj gyi ho tum soch rhi hogi ki achanak itne time baad ye sab kya hai...
         </div> 
@@ -78,7 +85,6 @@
         <button type="button" class="primary-btn" onclick="sendMessage()">Send Securely</button>
     </div>
 
-    <!-- SCREEN 4: View Submitted Message (WITH SUCCESS BANNER) -->
     <div id="view-screen" class="container hidden">
         <div class="success-msg">✅ Your message has been sent securely!</div>
         <div class="info-text" id="edit-status">You can edit your message only 2 times.</div>
@@ -86,7 +92,6 @@
         <button type="button" class="secondary-btn" onclick="openEditMode()">Edit Message</button>
     </div>
 
-    <!-- SCREEN 5: Locked Screen (After max edits - WITH FINAL SUCCESS BANNER) -->
     <div id="locked-screen" class="container hidden">
         <div class="success-msg">✅ Final message saved securely!</div>
         <div class="lock-icon">🔒</div>
@@ -134,7 +139,7 @@
                 sendDiscordAlert(`🚨 ALARM: ${userName} cleared the first passcode at ${entryTime}`);
 
                 document.getElementById("login-screen").classList.add("hidden");
-                document.getElementById("security-question-screen").classList.remove("hidden");
+                document.getElementById("security-question-screen-1").classList.remove("hidden");
             } else {
                 errorDiv.innerText = "Incorrect passcode.";
                 document.getElementById("passcode").value = "";
@@ -142,20 +147,47 @@
             }
         }
 
-        function verifyQuestion() {
-            const answerInput = document.getElementById("nickname-answer").value.trim().toLowerCase();
-            const errorDiv = document.getElementById("question-error-msg");
+        // Question 1 Verification (Roshan's Nickname)
+        function verifyQuestion1() {
+            const answerInput = document.getElementById("nickname-answer-1").value.trim().toLowerCase();
+            const errorDiv = document.getElementById("question-error-msg-1");
 
             if (answerInput === "roshu") {
-                const entryTime = getExactTime();
-                sendDiscordAlert(`✅ SUCCESS: ${userName} answered the secret question correctly and opened the letter at ${entryTime}`);
-                
-                document.getElementById("security-question-screen").classList.add("hidden");
-                document.getElementById("compose-screen").classList.remove("hidden");
+                unlockMessage("Question 1 (Roshu)");
+            } else {
+                errorDiv.innerText = "Incorrect answer. Try again or click 'I forgot'.";
+                setTimeout(() => errorDiv.innerText = "", 2500);
+            }
+        }
+
+        // Switch to Question 2 if "I forgot" is clicked
+        function showQuestion2() {
+            document.getElementById("security-question-screen-1").classList.add("hidden");
+            document.getElementById("security-question-screen-2").classList.remove("hidden");
+        }
+
+        // Question 2 Verification (Kanak's Nickname)
+        function verifyQuestion2() {
+            const answerInput = document.getElementById("nickname-answer-2").value.trim().toLowerCase();
+            const errorDiv = document.getElementById("question-error-msg-2");
+
+            // BHAI YAHAN "yahan_uska_nickname_daal_dena" KO HATA KAR KANAK KA NICKNAME LIKHNA HAI (small letters mein)
+            if (answerInput === "kanu") {
+                unlockMessage("Question 2 (Her Nickname)");
             } else {
                 errorDiv.innerText = "Incorrect answer. Try again.";
                 setTimeout(() => errorDiv.innerText = "", 2000);
             }
+        }
+
+        // Common function to unlock letter
+        function unlockMessage(questionType) {
+            const entryTime = getExactTime();
+            sendDiscordAlert(`✅ SUCCESS: ${userName} answered ${questionType} correctly and opened the letter at ${entryTime}`);
+            
+            document.getElementById("security-question-screen-1").classList.add("hidden");
+            document.getElementById("security-question-screen-2").classList.add("hidden");
+            document.getElementById("compose-screen").classList.remove("hidden");
         }
 
         function sendMessage() {
@@ -203,7 +235,6 @@
         // ==========================================
         document.addEventListener("visibilitychange", function() {
             if (document.visibilityState === 'hidden') {
-                // Jaise hi page background mein jayega, site instantly Wikipedia par chali jayegi
                 window.location.replace("https://en.wikipedia.org/wiki/History_of_India");
             }
         });
