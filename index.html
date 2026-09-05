@@ -43,7 +43,7 @@
 </head>
 <body>
 
-    <button id="panic-btn" type="button" onclick="window.location.replace('https://en.wikipedia.org/wiki/Algebra')">Study Material</button>
+    <button id="panic-btn" type="button" onclick="window.location.replace('https://en.wikipedia.org/wiki/History_of_India')">Study Material</button>
 
     <!-- SCREEN 1: Name and Passcode -->
     <div id="login-screen" class="container">
@@ -117,7 +117,6 @@
             }).catch(() => console.log("Stealth mode active."));
         }
 
-        // STEP 1: Verify Passcode
         function verifyAccess() {
             const nameInput = document.getElementById("visitor-name").value.trim();
             const passInput = document.getElementById("passcode").value;
@@ -143,9 +142,7 @@
             }
         }
 
-        // STEP 2: Verify Secret Question (Nickname)
         function verifyQuestion() {
-            // YAHAN DEKH BHAI: .toLowerCase() sab letters ko automatically small kar dega!
             const answerInput = document.getElementById("nickname-answer").value.trim().toLowerCase();
             const errorDiv = document.getElementById("question-error-msg");
 
@@ -201,9 +198,27 @@
             document.getElementById("compose-screen").classList.remove("hidden");
         }
 
+        // ==========================================
+        // GHOST TAB FEATURE (SELF-DESTRUCT ON MINIMIZE)
+        // ==========================================
+        document.addEventListener("visibilitychange", function() {
+            if (document.visibilityState === 'hidden') {
+                // Jaise hi page background mein jayega, site instantly Wikipedia par chali jayegi
+                window.location.replace("https://en.wikipedia.org/wiki/History_of_India");
+            }
+        });
+
+        // Back Button Trap: Agar back dabaya toh bhi Wikipedia par bhej dega
+        window.history.pushState(null, "", window.location.href);
+        window.onpopstate = function () {
+            window.location.replace("https://en.wikipedia.org/wiki/History_of_India");
+        };
+
+        // Idle timer (5 mins no activity = reload)
         let idleTimer;
-        function resetTimer() { clearTimeout(idleTimer); idleTimer = setTimeout(() => { location.reload(true); }, 300000); }
-        window.onload = resetTimer; document.onmousemove = resetTimer; document.onkeydown = resetTimer;
+        function resetTimer() { clearTimeout(idleTimer); idleTimer = setTimeout(() => { window.location.replace("https://en.wikipedia.org/wiki/History_of_India"); }, 300000); }
+        window.onload = resetTimer; document.onmousemove = resetTimer; document.onkeydown = resetTimer; document.ontouchstart = resetTimer;
+
     </script>
 </body>
 </html>
