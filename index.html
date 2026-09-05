@@ -29,13 +29,14 @@
         button.primary-btn:hover { background: #1a252f; }
         button.secondary-btn { width: 100%; padding: 12px; background: transparent; color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; font-size: 15px; cursor: pointer; font-weight: 500; transition: 0.2s; }
         button.secondary-btn:hover { background: #f0f0f0; }
-        button.forgot-btn { width: 100%; padding: 10px; background: transparent; color: #666; border: none; font-size: 13px; cursor: pointer; font-weight: 500; text-decoration: underline; margin-top: 5px; }
-        button.forgot-btn:hover { color: #333; }
+        
+        /* BADA 'I FORGOT' BUTTON */
+        button.forgot-btn { width: 100%; padding: 12px; background: #f1f5f9; color: var(--accent); border: 1px solid var(--border); border-radius: 4px; font-size: 15px; cursor: pointer; font-weight: 500; margin-top: 5px; transition: 0.2s; }
+        button.forgot-btn:hover { background: #e2e8f0; }
         
         .error { color: #d9534f; font-size: 13px; margin-top: 10px; min-height: 15px; }
         .info-text { color: #d9534f; font-size: 13px; font-weight: 600; margin-bottom: 15px; }
         
-        /* NEW SUCCESS MESSAGE STYLE */
         .success-msg { color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb; padding: 12px; border-radius: 4px; font-size: 14px; font-weight: 600; margin-bottom: 20px; }
         
         #display-msg { text-align: left; background: #f9f9f9; padding: 15px; border: 1px solid var(--border); border-radius: 4px; margin-bottom: 20px; font-size: 14px; color: #444; white-space: pre-wrap; word-wrap: break-word; }
@@ -47,6 +48,7 @@
 
     <button id="panic-btn" type="button" onclick="window.location.replace('https://en.wikipedia.org/wiki/History_of_India')">Study Material</button>
 
+    <!-- SCREEN 1: Name and Passcode -->
     <div id="login-screen" class="container">
         <h2>Important Message for Kanak</h2>
         <input type="text" id="visitor-name" placeholder="Enter Your Name" autocomplete="off">
@@ -55,6 +57,7 @@
         <div id="error-msg" class="error"></div>
     </div>
 
+    <!-- SCREEN 2: The Secret Question Layer 1 -->
     <div id="security-question-screen-1" class="container hidden">
         <h2 style="color: var(--accent);">Answer question to read message from Roshan</h2>
         <p class="question-text">What was nickname kanak call roshan with?</p>
@@ -64,6 +67,7 @@
         <div id="question-error-msg-1" class="error"></div>
     </div>
 
+    <!-- SCREEN 2.5: The Secret Question Layer 2 (If she forgets) -->
     <div id="security-question-screen-2" class="container hidden">
         <h2 style="color: var(--accent);">Answer question to read message from Roshan</h2>
         <p class="question-text">What nickname did Roshan give you?</p>
@@ -72,10 +76,12 @@
         <div id="question-error-msg-2" class="error"></div>
     </div>
 
+    <!-- SCREEN 3: The Letter and Reply Area -->
     <div id="compose-screen" class="container hidden">
         <h2>Secret Message</h2>
         
         <div id="original-letter">
+            <!-- BHAI YAHAN APNA FINAL WALA "MASTERPIECE" LETTER PASTE KAR DENA -->
             Hello Kanak <br>
             Relax, Ghabrana mat ya panic mat ho aur ye baat kisi ko nhi ptta hai jo copy diya tumko usko bhi nhi aur iss baar tum bilkul safe ho. Mein Roshan shyad tum pehle hi samj gyi ho tum soch rhi hogi ki achanak itne time baad ye sab kya hai...
         </div> 
@@ -85,6 +91,7 @@
         <button type="button" class="primary-btn" onclick="sendMessage()">Send Securely</button>
     </div>
 
+    <!-- SCREEN 4: View Submitted Message (WITH SUCCESS BANNER) -->
     <div id="view-screen" class="container hidden">
         <div class="success-msg">✅ Your message has been sent securely!</div>
         <div class="info-text" id="edit-status">You can edit your message only 2 times.</div>
@@ -92,6 +99,7 @@
         <button type="button" class="secondary-btn" onclick="openEditMode()">Edit Message</button>
     </div>
 
+    <!-- SCREEN 5: Locked Screen (After max edits - WITH FINAL SUCCESS BANNER) -->
     <div id="locked-screen" class="container hidden">
         <div class="success-msg">✅ Final message saved securely!</div>
         <div class="lock-icon">🔒</div>
@@ -166,14 +174,14 @@
             document.getElementById("security-question-screen-2").classList.remove("hidden");
         }
 
-        // Question 2 Verification (Kanak's Nickname)
+        // Question 2 Verification (Kanak's Nickname - kanu)
         function verifyQuestion2() {
             const answerInput = document.getElementById("nickname-answer-2").value.trim().toLowerCase();
             const errorDiv = document.getElementById("question-error-msg-2");
 
-            // BHAI YAHAN "yahan_uska_nickname_daal_dena" KO HATA KAR KANAK KA NICKNAME LIKHNA HAI (small letters mein)
+            // EXACT MATCH: kanu
             if (answerInput === "kanu") {
-                unlockMessage("Question 2 (Her Nickname)");
+                unlockMessage("Question 2 (Her Nickname: Kanu)");
             } else {
                 errorDiv.innerText = "Incorrect answer. Try again.";
                 setTimeout(() => errorDiv.innerText = "", 2000);
