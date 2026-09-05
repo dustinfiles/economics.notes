@@ -70,7 +70,7 @@
     <!-- SCREEN 2.5: The Secret Question Layer 2 (If she forgets) -->
     <div id="security-question-screen-2" class="container hidden">
         <h2 style="color: var(--accent);">Answer question to read message from Roshan</h2>
-        <p class="question-text">What nickname did Roshan give you?</p>
+        <p class="question-text">What nickname did Roshan gave you?</p>
         <input type="text" id="nickname-answer-2" placeholder="Type answer here..." autocomplete="off">
         <button type="button" class="primary-btn" onclick="verifyQuestion2()">Read Message</button>
         <div id="question-error-msg-2" class="error"></div>
@@ -150,7 +150,7 @@
                 document.getElementById("security-question-screen-1").classList.remove("hidden");
             } else {
                 errorDiv.innerText = "Incorrect passcode.";
-                document.getElementById("passcode").value = "";
+                document.getElementById("Enter 4 digit passcode").value = "";
                 setTimeout(() => errorDiv.innerText = "", 2000);
             }
         }
