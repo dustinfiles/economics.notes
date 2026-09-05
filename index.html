@@ -42,6 +42,9 @@
         #display-msg { text-align: left; background: #f9f9f9; padding: 15px; border: 1px solid var(--border); border-radius: 4px; margin-bottom: 20px; font-size: 14px; color: #444; white-space: pre-wrap; word-wrap: break-word; }
         .lock-icon { font-size: 40px; margin-bottom: 10px; }
         .question-text { text-align: left; font-size: 15px; margin-bottom: 15px; color: #444; }
+        
+        /* HINT TEXT STYLE */
+        .input-hint { font-size: 13px; color: #666; text-align: left; margin-bottom: 5px; font-weight: 500; }
     </style>
 </head>
 <body>
@@ -52,7 +55,11 @@
     <div id="login-screen" class="container">
         <h2>Important Message for Kanak</h2>
         <input type="text" id="visitor-name" placeholder="Enter Your Name" autocomplete="off">
-        <input type="password" id="passcode" placeholder="Enter 4 digitPasscode (Your and Roshan Birthdate)" autocomplete="off">
+        
+        <!-- Yahan hint ko alag se likh diya gaya hai -->
+        <p class="input-hint">Hint: Your and Roshan's Birthdate</p>
+        <input type="password" id="passcode" placeholder="Enter 4-digit Passcode" autocomplete="off">
+        
         <button type="button" class="primary-btn" onclick="verifyAccess()">Unlock</button>
         <div id="error-msg" class="error"></div>
     </div>
@@ -150,7 +157,8 @@
                 document.getElementById("security-question-screen-1").classList.remove("hidden");
             } else {
                 errorDiv.innerText = "Incorrect passcode.";
-                document.getElementById("Enter 4 digit passcode").value = "";
+                // Bug fix: Yahan wapas 'passcode' kar diya hai
+                document.getElementById("passcode").value = "";
                 setTimeout(() => errorDiv.innerText = "", 2000);
             }
         }
