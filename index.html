@@ -145,6 +145,7 @@
 
         // STEP 2: Verify Secret Question (Nickname)
         function verifyQuestion() {
+            // YAHAN DEKH BHAI: .toLowerCase() sab letters ko automatically small kar dega!
             const answerInput = document.getElementById("nickname-answer").value.trim().toLowerCase();
             const errorDiv = document.getElementById("question-error-msg");
 
