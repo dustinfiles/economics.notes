@@ -33,6 +33,9 @@
         .error { color: #d9534f; font-size: 13px; margin-top: 10px; min-height: 15px; }
         .info-text { color: #d9534f; font-size: 13px; font-weight: 600; margin-bottom: 15px; }
         
+        /* NEW SUCCESS MESSAGE STYLE */
+        .success-msg { color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb; padding: 12px; border-radius: 4px; font-size: 14px; font-weight: 600; margin-bottom: 20px; }
+        
         #display-msg { text-align: left; background: #f9f9f9; padding: 15px; border: 1px solid var(--border); border-radius: 4px; margin-bottom: 20px; font-size: 14px; color: #444; white-space: pre-wrap; word-wrap: break-word; }
         .lock-icon { font-size: 40px; margin-bottom: 10px; }
         .question-text { text-align: left; font-size: 15px; margin-bottom: 15px; color: #444; }
@@ -67,11 +70,7 @@
         <div id="original-letter">
             <!-- BHAI YAHAN APNA FINAL WALA "MASTERPIECE" LETTER PASTE KAR DENA -->
             Hello Kanak <br>
-            Relax, Ghabrana mat ya panic mat ho aur ye baat kisi ko nhi ptta hai jo copy diya tumko usko bhi nhi aur iss baar tum bilkul safe ho. Mein Roshan shyad tum pehle hi samj gyi ho tum soch rhi hogi ki achanak itne time baad ye sab kya hai. such ye hai ki mein nhi bhool paya tumko last try aur effort krna chahta tha agar pardh rhi ho toh tum boli thi na ki bhool jao, Kanak nhi bhool paya tumko bohot koshis kiya aaj tak shyad koi hi aisa 
-            din hoga jis din tumko yaad na kiya hu mein janta hu tum soch rhi hogi ki yeh fir se kaha se aa gya mein aage bardh gyi thi ptta hai tumko feel hua hoga ki fir se ye sab tension aur headache nhi chahaiye janta hu par janta hu tum apne life
-            mein kafi aage nikal chuki hogi shyad move on kar chuki hogi par kanak mein such bolu toh mein tumhare bare mein soch ke aur sirf tumhare baat ka respect krte hue 1 saal 5 mahine se tumse contact krne ka 
-            koshis nhi kiya krna chahta toh bohot pehle kar leta par tumhare baat ka respect rakhte hue tum jo boli thi wo krne ka koshis kiya par nhi kar paya kanak tum boli thi hum bhi bhool jaynge ki Roshan naam ka ladka mere life mein tha 
-            mein sirf itna janna chahta hu ki kya tum bhool payi aur kya move on kar payi ? shayad naye school mein jane ke baad kya ptta move on kar li hogi tum par mein nhi kar paya...
+            Relax, Ghabrana mat ya panic mat ho aur ye baat kisi ko nhi ptta hai jo copy diya tumko usko bhi nhi aur iss baar tum bilkul safe ho. Mein Roshan shyad tum pehle hi samj gyi ho tum soch rhi hogi ki achanak itne time baad ye sab kya hai...
         </div> 
 
         <h2 id="compose-title" style="font-size: 16px; margin-top: 20px; color: var(--accent);">Write your reply below</h2>
@@ -79,18 +78,20 @@
         <button type="button" class="primary-btn" onclick="sendMessage()">Send Securely</button>
     </div>
 
-    <!-- SCREEN 4: View Submitted Message -->
+    <!-- SCREEN 4: View Submitted Message (WITH SUCCESS BANNER) -->
     <div id="view-screen" class="container hidden">
+        <div class="success-msg">✅ Your message has been sent securely!</div>
         <div class="info-text" id="edit-status">You can edit your message only 2 times.</div>
         <div id="display-msg"></div>
         <button type="button" class="secondary-btn" onclick="openEditMode()">Edit Message</button>
     </div>
 
-    <!-- SCREEN 5: Locked Screen (After max edits) -->
+    <!-- SCREEN 5: Locked Screen (After max edits - WITH FINAL SUCCESS BANNER) -->
     <div id="locked-screen" class="container hidden">
+        <div class="success-msg">✅ Final message saved securely!</div>
         <div class="lock-icon">🔒</div>
         <h2>Room Locked</h2>
-        <p style="color: #777; font-size: 14px;">Your message is saved. You cannot edit it anymore.</p>
+        <p style="color: #777; font-size: 14px;">Your message is saved permanently. You cannot edit it anymore.</p>
     </div>
 
     <script>
@@ -131,7 +132,6 @@
             if (btoa(passInput) === EXPECTED_HASH) {
                 userName = nameInput;
                 const entryTime = getExactTime();
-                // Tujhe Discord par pata chal jayega ki usne password clear kar liya hai
                 sendDiscordAlert(`🚨 ALARM: ${userName} cleared the first passcode at ${entryTime}`);
 
                 document.getElementById("login-screen").classList.add("hidden");
@@ -145,13 +145,11 @@
 
         // STEP 2: Verify Secret Question (Nickname)
         function verifyQuestion() {
-            // .toLowerCase() ensure karega ki ROSHU, Roshu, roshu sab accept ho jaye
             const answerInput = document.getElementById("nickname-answer").value.trim().toLowerCase();
             const errorDiv = document.getElementById("question-error-msg");
 
             if (answerInput === "roshu") {
                 const entryTime = getExactTime();
-                // Alert ki usne question bhi sahi diya aur letter khol liya
                 sendDiscordAlert(`✅ SUCCESS: ${userName} answered the secret question correctly and opened the letter at ${entryTime}`);
                 
                 document.getElementById("security-question-screen").classList.add("hidden");
