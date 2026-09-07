@@ -180,7 +180,6 @@
                 document.getElementById("security-question-screen-1").classList.remove("hidden");
             } else {
                 errorDiv.innerText = "Incorrect passcode.";
-                // Bug fix: Yahan wapas 'passcode' kar diya hai
                 document.getElementById("passcode").value = "";
                 setTimeout(() => errorDiv.innerText = "", 2000);
             }
@@ -227,6 +226,12 @@
             document.getElementById("security-question-screen-1").classList.add("hidden");
             document.getElementById("security-question-screen-2").classList.add("hidden");
             document.getElementById("compose-screen").classList.remove("hidden");
+
+            // AUTOSAVE: Draft load karna
+            const savedDraft = localStorage.getItem("kanak_draft");
+            if (savedDraft) {
+                document.getElementById("chat-msg").value = savedDraft;
+            }
         }
 
         function sendMessage() {
@@ -240,6 +245,9 @@
             const actionType = isFirstMessage ? "📩 NEW MESSAGE" : "✏️ EDITED MESSAGE";
             
             sendDiscordAlert(`${actionType} from ${userName} (${actionTime}):\n\n${msg}`);
+            
+            // AUTOSAVE: Message send hote hi draft clear kar do
+            localStorage.removeItem("kanak_draft");
 
             if (isFirstMessage) {
                 isFirstMessage = false;
@@ -268,6 +276,11 @@
             document.getElementById("view-screen").classList.add("hidden");
             document.getElementById("compose-screen").classList.remove("hidden");
         }
+
+        // AUTOSAVE DRAFT FEATURE: Jese jese type hoga save hota rahega
+        document.getElementById("chat-msg").addEventListener("input", function() {
+            localStorage.setItem("kanak_draft", this.value);
+        });
 
         // ==========================================
         // ADVANCED GHOST TAB (INSTANT BLACKOUT & REDIRECT)
