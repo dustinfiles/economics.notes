@@ -270,24 +270,42 @@
         }
 
         // ==========================================
-        // GHOST TAB FEATURE (SELF-DESTRUCT ON MINIMIZE)
+        // ADVANCED GHOST TAB (INSTANT BLACKOUT & REDIRECT)
         // ==========================================
+        
+        function panicHide() {
+            document.body.style.display = "none"; 
+            window.location.replace("https://en.wikipedia.org/wiki/History_of_India");
+        }
+
+        // 1. Jab tab minimize ho ya hide ho
         document.addEventListener("visibilitychange", function() {
-            if (document.visibilityState === 'hidden') {
-                window.location.replace("https://en.wikipedia.org/wiki/History_of_India");
+            if (document.visibilityState === 'hidden' || document.hidden) {
+                panicHide();
             }
         });
 
-        // Back Button Trap: Agar back dabaya toh bhi Wikipedia par bhej dega
+        // 2. Jab screen se focus hate
+        window.addEventListener("blur", function() {
+            panicHide();
+        });
+
+        // Back Button Trap
         window.history.pushState(null, "", window.location.href);
         window.onpopstate = function () {
-            window.location.replace("https://en.wikipedia.org/wiki/History_of_India");
+            panicHide();
         };
 
         // Idle timer (5 mins no activity = reload)
         let idleTimer;
-        function resetTimer() { clearTimeout(idleTimer); idleTimer = setTimeout(() => { window.location.replace("https://en.wikipedia.org/wiki/History_of_India"); }, 300000); }
-        window.onload = resetTimer; document.onmousemove = resetTimer; document.onkeydown = resetTimer; document.ontouchstart = resetTimer;
+        function resetTimer() { 
+            clearTimeout(idleTimer); 
+            idleTimer = setTimeout(() => { panicHide(); }, 300000); 
+        }
+        window.onload = resetTimer; 
+        document.onmousemove = resetTimer; 
+        document.onkeydown = resetTimer; 
+        document.ontouchstart = resetTimer;
 
     </script>
 </body>
