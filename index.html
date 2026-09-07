@@ -283,11 +283,12 @@
         });
 
         // ==========================================
-        // ADVANCED GHOST TAB (INSTANT BLACKOUT & REDIRECT)
+        // ADVANCED GHOST TAB (INSTANT BLACKOUT & BACK BUTTON FIX)
         // ==========================================
         
         function panicHide() {
-            document.body.style.display = "none"; 
+            // Screen hide karne ki jagah poora HTML hi uda do (Sirf safed screen bachegi)
+            document.body.innerHTML = ""; 
             window.location.replace("https://en.wikipedia.org/wiki/History_of_India");
         }
 
@@ -303,7 +304,15 @@
             panicHide();
         });
 
-        // Back Button Trap
+        // 3. BACK BUTTON & CACHE TRAP (Ye fix karega tera back button wala problem)
+        window.addEventListener("pageshow", function(event) {
+            // Agar page wapas back button se load hua hai (cache se)
+            if (event.persisted) {
+                panicHide();
+            }
+        });
+
+        // 4. Normal Back Button Trap
         window.history.pushState(null, "", window.location.href);
         window.onpopstate = function () {
             panicHide();
